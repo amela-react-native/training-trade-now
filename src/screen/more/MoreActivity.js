@@ -4,11 +4,20 @@ import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
 import IconProvider from '../../components/IconProvider';
 import ListSanpham from './ListMenuSanPham';
 export default function MoreActivity(props) {
+  function onPressBack() {
+    props.navigation.navigate('Setings');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.viewHeader}>
         <View style={styles.iconheader}>
-          <IconProvider name={'settings-outline'} size={24} color={'white'} />
+          <IconProvider
+            onPress={onPressBack}
+            name={'settings-outline'}
+            size={24}
+            color={'white'}
+          />
         </View>
       </View>
       <Text style={styles.txtTitle}> More</Text>

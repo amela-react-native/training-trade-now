@@ -26,6 +26,9 @@ import ThongtinProfile from '../screen/profile/ThongtinProfileActivity';
 
 // More Acitivity
 import MoreActivity from '../screen/more/MoreActivity';
+
+// Setting Activity
+import SetingActivity from '../screen/setting/SettingActivity';
 const BottomNavigation = createStackNavigator(
   {
     default: createBottomTabNavigator({
@@ -109,6 +112,12 @@ export default createAppContainer(
     },
     ThongtinProfile: {
       screen: ThongtinProfile,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    Setings: {
+      screen: SetingActivity,
       navigationOptions: () => ({
         header: null,
       }),
