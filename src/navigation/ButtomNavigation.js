@@ -22,14 +22,18 @@ import SplashActivity from '../screen/splash/SplashActivity';
 // Profile
 import EditProfileActivity from '../screen/profile/EditProfileActivity';
 import IconProvider from '../components/IconProvider';
+import ThongtinProfile from '../screen/profile/ThongtinProfileActivity';
+
+// More Acitivity
+import MoreActivity from '../screen/more/MoreActivity';
 const BottomNavigation = createStackNavigator(
   {
     default: createBottomTabNavigator({
-      Profile: {
-        screen: ProfileActivity,
+      More: {
+        screen: MoreActivity,
         navigationOptions: {
           tabBarIcon: ({tintColor}) => (
-            <Icon name="user" size={24} color={tintColor} />
+            <Icon name="bars" size={24} color={tintColor} />
           ),
         },
       },
@@ -57,11 +61,11 @@ const BottomNavigation = createStackNavigator(
           ),
         },
       },
-      Notification: {
-        screen: NotificationActivity,
+      Profile: {
+        screen: ProfileActivity,
         navigationOptions: {
           tabBarIcon: ({tintColor}) => (
-            <Icon name="heart" size={24} color={tintColor} />
+            <Icon name="user" size={24} color={tintColor} />
           ),
         },
       },
@@ -91,17 +95,23 @@ const AppNavigation = createStackNavigator({
       header: null,
     }),
   },
-  EditProfile: {
-    screen: EditProfileActivity,
-    navigationOptions: () => ({
-      header: null,
-    }),
-  },
 });
 
 export default createAppContainer(
   createSwitchNavigator({
     BottomNavigation: BottomNavigation,
     Auth: AppNavigation,
+    EditProfile: {
+      screen: EditProfileActivity,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    ThongtinProfile: {
+      screen: ThongtinProfile,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
   }),
 );
