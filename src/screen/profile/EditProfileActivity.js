@@ -8,44 +8,44 @@ import {Avatar, CheckBox} from 'react-native-elements';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ImagePicker from 'react-native-image-picker';
 export default class EditProfileActivity extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-      date: new Date('2020-06-12T14:42:42'),
-      mode: 'date',
-      show: false,
-    };
-  }
-  setDate = (event, date) => {
-    date = date || this.state.date;
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     text: '',
+  //     date: new Date('2020-06-12T14:42:42'),
+  //     mode: 'date',
+  //     show: false,
+  //   };
+  // }
+  // setDate = (event, date) => {
+  //   date = date || this.state.date;
 
-    this.setState({
-      show: Platform.OS === 'ios' ? true : false,
-      date,
-    });
-  };
+  //   this.setState({
+  //     show: Platform.OS === 'ios' ? true : false,
+  //     date,
+  //   });
+  // };
 
-  show = mode => {
-    this.setState({
-      show: true,
-      mode,
-    });
-  };
+  // show = mode => {
+  //   this.setState({
+  //     show: true,
+  //     mode,
+  //   });
+  // };
 
-  datepicker = () => {
-    this.show('date');
-  };
+  // datepicker = () => {
+  //   this.show('date');
+  // };
 
-  timepicker = () => {
-    this.show('time');
-  };
+  // timepicker = () => {
+  //   this.show('time');
+  // };
   _onPressBack = () => {
     this.props.navigation.navigate('Profile');
   };
 
   render() {
-    const {show, date, mode} = this.state;
+    // const {show, date, mode} = this.state;
     // const options = {
     //   title: 'Select Avatar',
     //   customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
@@ -110,7 +110,7 @@ export default class EditProfileActivity extends React.Component {
               18/10/2019
             </Text>
           </View>
-          {show && (
+          {/* {show && (
             <DateTimePicker
               value={date}
               mode={mode}
@@ -118,7 +118,7 @@ export default class EditProfileActivity extends React.Component {
               display="calendar"
               onChange={this.setDate}
             />
-          )}
+          )} */}
           <TextInput
             placeholder="Phone Number"
             style={styles.input}

@@ -6,8 +6,8 @@ export default function Toolbar(props) {
   return (
     <View style={styles.container}>
       <View style={styles.viewHeader}>
-        <Icon style={styles.message} name="comment" size={23} />
-        <Icon style={styles.notification} name="bell" size={23} />
+        <Icon style={styles.message} name="comment" size={24} />
+        <Icon style={styles.notification} name="bell" size={24} />
       </View>
     </View>
   );

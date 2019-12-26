@@ -37,7 +37,6 @@ export default class ProfileActivity extends React.Component {
       this.showModal();
     }
   };
-
   render() {
     return (
       <View style={styles.container}>
@@ -53,7 +52,9 @@ export default class ProfileActivity extends React.Component {
               }}
             />
             <View style={styles.headerbody}>
-              <Text style={styles.txtUsername}>Trần Tiến Long</Text>
+              <Text style={styles.txtUsername} onPress={this.commentshow}>
+                Trần Tiến Long
+              </Text>
               <Text style={styles.txtEmail}>longttph05657@fpt.edu.vn</Text>
               <TouchableOpacity
                 style={styles.editProfile}
@@ -83,7 +84,6 @@ export default class ProfileActivity extends React.Component {
           isOpen={this.state.modal}
           keyboardTopOffset={0}
           coverScreen={true}
-          animationDuration={500}
           backdropPressToClose={false}
           onClosed={() => this.setState({modal: false})}
           onOpened={() => this.setState({modal: true})}>
@@ -93,6 +93,7 @@ export default class ProfileActivity extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -147,7 +148,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     elevation: 5,
-    marginTop: 15,
     marginBottom: 10,
   },
   swipe: {
