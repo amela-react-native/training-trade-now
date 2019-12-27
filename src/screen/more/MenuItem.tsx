@@ -10,7 +10,7 @@ interface Props {
     title: string,
     colors:  string[],
 }
-function MenuItem({onPress,iconLeft,iconRight,title, colors}: Props){
+function MenuItem({onPress, iconLeft, iconRight, title, colors}: Props){
     return(
       <View style={styles.viewChild}>
         <View style={styles.viewIconMenu}>
@@ -18,10 +18,10 @@ function MenuItem({onPress,iconLeft,iconRight,title, colors}: Props){
             <IconProvider name={iconLeft} size={28} color={'#FFFFFF'} />
           </LinearGradient>
         </View>
-      <View style={styles.viewIcon}>
-        <Text style={styles.txtMenu}>{title}</Text>
+      <View style={styles.viewIcon} >
+        <Text style={styles.txtMenu} >{title}</Text>
         <View style={styles.viewIconNext}>
-          <IconProvider name={iconRight} size={20} />
+          <IconProvider name={iconRight} size={20} onPress={()=> onPress && onPress()} />
         </View>
       </View>
       </View>

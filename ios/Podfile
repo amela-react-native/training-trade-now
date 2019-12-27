@@ -40,6 +40,8 @@ target 'TradeNow' do
 
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
 
+  pod 'react-native-image-crop-picker', :path => '../node_modules/react-native-image-crop-picker'
+
   target 'TradeNowTests' do
     inherit! :search_paths
     # Pods for testing

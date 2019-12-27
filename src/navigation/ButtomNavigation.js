@@ -11,6 +11,7 @@ import ExChangeActivity from '../screen/change/ExChangeActivity';
 import NotificationActivity from '../screen/notifications/NotificationActivity';
 import MessageActivity from '../screen/message/MessageActivity';
 import ProfileActivity from '../screen/profile/ProfileActivity';
+import SearchActivity from '../screen/search/SearchActivity';
 
 // Login and Register
 import LoginActivity from '../screen/regiterandlogin/LoginActivity';
@@ -21,7 +22,6 @@ import SplashActivity from '../screen/splash/SplashActivity';
 
 // Profile
 import EditProfileActivity from '../screen/profile/EditProfileActivity';
-import IconProvider from '../components/IconProvider';
 import ThongtinProfile from '../screen/profile/ThongtinProfileActivity';
 
 // More Acitivity
@@ -29,14 +29,19 @@ import MoreActivity from '../screen/more/MoreActivity';
 
 // Setting Activity
 import SetingActivity from '../screen/setting/SettingActivity';
+
+// Category Activity
+import CategoryActivity from '../screen/category/CategoryActivity';
+import DetailCategory from '../screen/category/DetailCategory';
+import AddCategory from '../screen/category/AddCategory';
 const BottomNavigation = createStackNavigator(
   {
     default: createBottomTabNavigator({
-      More: {
-        screen: MoreActivity,
+      Trade: {
+        screen: ExChangeActivity,
         navigationOptions: {
           tabBarIcon: ({tintColor}) => (
-            <Icon name="bars" size={24} color={tintColor} />
+            <Icon name="plus-circle" size={24} color={tintColor} />
           ),
         },
       },
@@ -48,19 +53,11 @@ const BottomNavigation = createStackNavigator(
           ),
         },
       },
-      ExChange: {
-        screen: ExChangeActivity,
+      Search: {
+        screen: SearchActivity,
         navigationOptions: {
           tabBarIcon: ({tintColor}) => (
             <Icon name="search" size={24} color={tintColor} />
-          ),
-        },
-      },
-      Trade: {
-        screen: MessageActivity,
-        navigationOptions: {
-          tabBarIcon: ({tintColor}) => (
-            <Icon name="plus-circle" size={24} color={tintColor} />
           ),
         },
       },
@@ -69,6 +66,14 @@ const BottomNavigation = createStackNavigator(
         navigationOptions: {
           tabBarIcon: ({tintColor}) => (
             <Icon name="user" size={24} color={tintColor} />
+          ),
+        },
+      },
+      More: {
+        screen: MoreActivity,
+        navigationOptions: {
+          tabBarIcon: ({tintColor}) => (
+            <Icon name="bars" size={24} color={tintColor} />
           ),
         },
       },
@@ -102,6 +107,18 @@ const AppNavigation = createStackNavigator({
 
 export default createAppContainer(
   createSwitchNavigator({
+    AddCategory: {
+      screen: AddCategory,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    Category: {
+      screen: CategoryActivity,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
     BottomNavigation: BottomNavigation,
     Auth: AppNavigation,
     EditProfile: {
@@ -118,6 +135,12 @@ export default createAppContainer(
     },
     Setings: {
       screen: SetingActivity,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    DetailCategory: {
+      screen: DetailCategory,
       navigationOptions: () => ({
         header: null,
       }),

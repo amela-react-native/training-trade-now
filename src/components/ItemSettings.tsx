@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         height: 45,
         justifyContent: 'space-around',
-        borderBottomWidth: 1,
+        borderBottomWidth: 0.3,
         borderBottomColor: '#A2A9B5',
     },
     viewiconRight: {
