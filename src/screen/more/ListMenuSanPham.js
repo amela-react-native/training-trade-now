@@ -4,6 +4,9 @@ import {StyleSheet, ScrollView} from 'react-native';
 import MenuItem from './MenuItem';
 
 export default function ListMenuSanpham(props) {
+  function goDetail() {
+    props.onPress && props.onPress();
+  }
   return (
     <ScrollView style={styles.viewBody}>
       {/* View Menu Book  */}
@@ -12,6 +15,7 @@ export default function ListMenuSanpham(props) {
         title={'Sách'}
         colors={['#FFAE4E', '#FF7676', '#FF7676']}
         iconLeft={'book-open-variant'}
+        onPress={goDetail}
       />
       {/* Thời trang */}
       <MenuItem
