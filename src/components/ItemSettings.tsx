@@ -4,9 +4,9 @@ import IconProvider from './IconProvider';
 
 interface Props {
     onPress?(): any,
-    iconLeft: string,
-    iconRight: string,
-    title: string,
+    iconLeft?: string,
+    iconRight?: string,
+    title?: string,
 }
 function ItemSetting({onPress,iconLeft,iconRight,title}:Props){
     return(

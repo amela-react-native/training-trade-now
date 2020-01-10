@@ -14,8 +14,8 @@ import ProfileActivity from '../screen/profile/ProfileActivity';
 import SearchActivity from '../screen/search/SearchActivity';
 
 // Login and Register
-import LoginActivity from '../screen/regiterandlogin/LoginActivity';
-import RegisterActivity from '../screen/regiterandlogin/RegisterActivity';
+import LoginActivity from '../screen/regiterandlogin/login/LoginActivity';
+import RegisterActivity from '../screen/regiterandlogin/register/RegisterActivity';
 
 // Splash
 import SplashActivity from '../screen/splash/SplashActivity';
@@ -34,17 +34,21 @@ import SetingActivity from '../screen/setting/SettingActivity';
 import CategoryActivity from '../screen/category/CategoryActivity';
 import DetailCategory from '../screen/category/DetailCategory';
 import AddCategory from '../screen/category/AddCategory';
+
+// Detail Activity
+import DetailListSanPham from '../screen/details/DetailListSanPham';
+
+// UserOther Activity
+import ProfileUserOther from '../screen//profileUserOther/ProfileUserOther';
+import DetailSwiperImage from '../screen/listItem/DetailSwiperImage';
+// Messagge
+import DetailMessage from '../screen/message/DetailMessage';
+
+// Select SanPham
+import DetailSelectSanPham from '../screen/details/DetailSeclectSanPham';
 const BottomNavigation = createStackNavigator(
   {
     default: createBottomTabNavigator({
-      Trade: {
-        screen: ExChangeActivity,
-        navigationOptions: {
-          tabBarIcon: ({tintColor}) => (
-            <Icon name="plus-circle" size={24} color={tintColor} />
-          ),
-        },
-      },
       Home: {
         screen: HomeActivity,
         navigationOptions: {
@@ -58,6 +62,14 @@ const BottomNavigation = createStackNavigator(
         navigationOptions: {
           tabBarIcon: ({tintColor}) => (
             <Icon name="search" size={24} color={tintColor} />
+          ),
+        },
+      },
+      Trade: {
+        screen: ExChangeActivity,
+        navigationOptions: {
+          tabBarIcon: ({tintColor}) => (
+            <Icon name="plus-circle" size={24} color={tintColor} />
           ),
         },
       },
@@ -85,12 +97,6 @@ const BottomNavigation = createStackNavigator(
 );
 
 const AppNavigation = createStackNavigator({
-  SplashActivity: {
-    screen: SplashActivity,
-    navigationOptions: () => ({
-      header: null,
-    }),
-  },
   Login: {
     screen: LoginActivity,
     navigationOptions: () => ({
@@ -103,10 +109,52 @@ const AppNavigation = createStackNavigator({
       header: null,
     }),
   },
+  SplashActivity: {
+    screen: SplashActivity,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
 });
 
 export default createAppContainer(
-  createSwitchNavigator({
+  createStackNavigator({
+    BottomNavigation: {
+      screen: BottomNavigation,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    Message: {
+      screen: MessageActivity,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    ProfileUserOther: {
+      screen: ProfileUserOther,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    DetailListSanPham: {
+      screen: DetailListSanPham,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    EditProfile: {
+      screen: EditProfileActivity,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    Auth: {
+      screen: AppNavigation,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
     AddCategory: {
       screen: AddCategory,
       navigationOptions: () => ({
@@ -115,14 +163,6 @@ export default createAppContainer(
     },
     Category: {
       screen: CategoryActivity,
-      navigationOptions: () => ({
-        header: null,
-      }),
-    },
-    BottomNavigation: BottomNavigation,
-    Auth: AppNavigation,
-    EditProfile: {
-      screen: EditProfileActivity,
       navigationOptions: () => ({
         header: null,
       }),
@@ -141,6 +181,30 @@ export default createAppContainer(
     },
     DetailCategory: {
       screen: DetailCategory,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    Notification: {
+      screen: NotificationActivity,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    DetailSwiperImage: {
+      screen: DetailSwiperImage,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    DetailMessage: {
+      screen: DetailMessage,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    DetailSelectSanPham: {
+      screen: DetailSelectSanPham,
       navigationOptions: () => ({
         header: null,
       }),
