@@ -4,8 +4,8 @@ import HeaderItem from '../../components/HeaderItem';
 import ListMenuSanPham from '../more/ListMenuSanPham';
 
 function CategoryActivity(props) {
-  function goBack() {
-    props.navigation.navigate('Trade');
+  function goback() {
+    props.navigation.goBack();
   }
   function handleItemOnPress() {
     props.navigation.navigate('DetailCategory');
@@ -13,7 +13,7 @@ function CategoryActivity(props) {
 
   return (
     <View style={styles.container}>
-      <HeaderItem iconLeft={'arrow-left'} title={'Thể Loại'} onPress={goBack} />
+      <HeaderItem iconLeft={'arrow-left'} title={'Thể Loại'} onPress={goback} />
       <ListMenuSanPham onPress={handleItemOnPress} />
     </View>
   );

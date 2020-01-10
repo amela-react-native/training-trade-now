@@ -15,14 +15,14 @@ import TextInputs from '../../components/TextInputs';
 import ImagePicker from 'react-native-image-crop-picker';
 import PERMISSIONS from 'react-native-permissions';
 
-function AddCategory(props) {
+const AddCategory = ({image}) => {
   const [titles, setTitle] = useState('');
   const [news, setNews] = useState('');
   const [description, setDescription] = useState('');
   const [exchange, setExchange] = useState('');
   const [images, setImage] = useState('');
 
-  function goBack() {
+  function goBack({props}) {
     props.navigation.navigate('DetailCategory');
   }
   function checkValidate() {}
@@ -69,19 +69,23 @@ function AddCategory(props) {
           compressImageQuality: 0.7,
           boderRadius: 50,
           cropping: true,
+          multiple: true,
+        }).then(imasge => {
+          console.log(imasge);
         });
-        setImage({images: result.path});
-        // console.log(images);
+        setImage({uri: result.path});
       }
     } catch (e) {
       console.log(e);
     }
   }
 
-  function renderImage() {
-    // return <Image style={styles.image} source={images} />;
-    console.log(images);
-  }
+  useEffect(() => {
+    if (image) {
+      console.log('useEffect: ' + image);
+      setImage({uri: image});
+    }
+  }, [image]);
 
   return (
     <View style={styles.container}>
@@ -104,8 +108,7 @@ function AddCategory(props) {
         </View>
         <ScrollView style={styles.viewScrollview}>
           <Text>ad</Text>
-          {images ? renderImage() : null}
-          <Image style={styles.image} source={{uri: props.images}} />
+          <Image style={styles.image} source={images} />
         </ScrollView>
       </View>
       <View style={styles.viewBody}>
@@ -151,7 +154,7 @@ function AddCategory(props) {
       </View>
     </View>
   );
-}
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,

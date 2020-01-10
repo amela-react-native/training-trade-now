@@ -11,7 +11,7 @@ import Modal from 'react-native-modalbox';
 
 import {Toolbar} from '../../components';
 import FormProfile from '../../components/form/FormProfile';
-
+import Informations from '../../components/Informations';
 import ThongtinProfile from './ThongtinProfileActivity';
 
 export default class ProfileActivity extends React.Component {
@@ -45,7 +45,7 @@ export default class ProfileActivity extends React.Component {
           <View style={styles.body}>
             <Avatar
               rounded
-              size="xlarge"
+              size="large"
               source={{
                 uri:
                   'https://i.pinimg.com/564x/b8/2f/15/b82f15bd600f94a83e4f69a4cf188603.jpg',
@@ -63,17 +63,43 @@ export default class ProfileActivity extends React.Component {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.viewbody}>
-            <FormProfile title="Thông tin " onPress={this.commentshow} />
-            <FormProfile title="" />
-            <FormProfile title="Pending Shipments" />
-            <FormProfile title="Finished Orders" />
+          <View style={styles.viewInfor}>
+            <Text style={styles.txtTitle}>Infomations</Text>
+            <View style={styles.viewChidlInfo}>
+              <Informations title={'Sản phẩm tải lên'} number={'30'} />
+              <Informations title={'Trao đổi thành công'} number={'30'} />
+              <Informations title={'Danh sách đã lưu'} number={'30'} />
+              <Informations title={'Đánh giá về tôi'} number={'30'} />
+            </View>
           </View>
           <View style={styles.viewbody}>
-            <FormProfile title="Invite Friends" />
-            <FormProfile title="Customer Support" />
-            <FormProfile title="Rate Our App" />
-            <FormProfile title="Make a Suggestion" />
+            <FormProfile
+              title="Invite Friends"
+              iconLeft={'email-mark-as-unread'}
+              iconRight={'chevron-right'}
+            />
+            <FormProfile
+              title="Customer Support"
+              iconLeft={'headphones'}
+              iconRight={'chevron-right'}
+            />
+            <FormProfile
+              title="Rate Our App"
+              iconLeft={'star-circle-outline'}
+              iconRight={'chevron-right'}
+            />
+            <FormProfile
+              title="Make a Suggestion"
+              iconLeft={'square-edit-outline'}
+              iconRight={'chevron-right'}
+            />
+          </View>
+          <View style={styles.viewbodyTow}>
+            <FormProfile
+              title="Settings"
+              iconLeft={'settings-outline'}
+              iconRight={'chevron-right'}
+            />
           </View>
         </ScrollView>
         <Modal
@@ -132,7 +158,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   viewbody: {
-    height: 200,
+    height: 250,
     backgroundColor: '#FFFFFF',
     marginHorizontal: 20,
     marginTop: 20,
@@ -154,4 +180,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  viewbodyTow: {
+    height: 50,
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 20,
+    marginTop: 10,
+    borderRadius: 10,
+    marginBottom: 5,
+    paddingHorizontal: 20,
+  },
+  viewChidlInfo: {
+    height: 100,
+    flexDirection: 'row',
+    marginHorizontal: 10,
+  },
+  txtTitle: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginHorizontal: 20,
+    marginVertical: 20,
+  }
 });
