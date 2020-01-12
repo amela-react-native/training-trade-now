@@ -46,6 +46,9 @@ import DetailMessage from '../screen/message/DetailMessage';
 
 // Select SanPham
 import DetailSelectSanPham from '../screen/details/DetailSeclectSanPham';
+
+// Tab
+import TabBarNavigation from './TabBarNavigation';
 const BottomNavigation = createStackNavigator(
   {
     default: createBottomTabNavigator({
@@ -66,7 +69,7 @@ const BottomNavigation = createStackNavigator(
         },
       },
       Trade: {
-        screen: ExChangeActivity,
+        screen: TabBarNavigation,
         navigationOptions: {
           tabBarIcon: ({tintColor}) => (
             <Icon name="plus-circle" size={24} color={tintColor} />
@@ -119,6 +122,12 @@ const AppNavigation = createStackNavigator({
 
 export default createAppContainer(
   createStackNavigator({
+    AddCategory: {
+      screen: AddCategory,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
     BottomNavigation: {
       screen: BottomNavigation,
       navigationOptions: () => ({
@@ -151,12 +160,6 @@ export default createAppContainer(
     },
     Auth: {
       screen: AppNavigation,
-      navigationOptions: () => ({
-        header: null,
-      }),
-    },
-    AddCategory: {
-      screen: AddCategory,
       navigationOptions: () => ({
         header: null,
       }),

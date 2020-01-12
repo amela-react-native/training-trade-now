@@ -1,6 +1,5 @@
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
 
 import MyStuffActivity from '../screen/change/MyStuffActivity';
 import IExChageActivity from '../screen/change/IExChageActivity';
@@ -33,13 +32,5 @@ const TabarNavigation = createMaterialTopTabNavigator(
     },
   },
 );
-const App = createStackNavigator({
-  TabarNavigation: {
-    screen: TabarNavigation,
-    navigationOptions: {
-      header: null,
-    },
-  },
-});
 
-export default createAppContainer(App);
+export default createAppContainer(TabarNavigation);
