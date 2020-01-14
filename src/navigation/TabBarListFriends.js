@@ -1,15 +1,15 @@
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import {createAppContainer} from 'react-navigation';
 
-import MyStuffActivity from '../screen/change/MyStuffActivity';
-import IExChageActivity from '../screen/change/IExChageActivity';
-const TabarNavigation = createMaterialTopTabNavigator(
+import ListFollower from '../screen/listFriends/ListFollower';
+import ListFollowing from '../screen/listFriends/ListFollowing';
+const TabBarListFriends = createMaterialTopTabNavigator(
   {
-    MyStuff: {
-      screen: MyStuffActivity,
+    Followers: {
+      screen: ListFollower,
     },
-    IExChage: {
-      screen: IExChageActivity,
+    Following: {
+      screen: ListFollowing,
     },
   },
   {
@@ -33,4 +33,4 @@ const TabarNavigation = createMaterialTopTabNavigator(
   },
 );
 
-export default createAppContainer(TabarNavigation);
+export default createAppContainer(TabBarListFriends);

@@ -5,6 +5,13 @@ import IconProvider from '../../components/IconProvider';
 import {Avatar} from 'react-native-elements';
 
 export default function ThongtinProfileActivity(props) {
+  function onPresstoFollower() {
+    props.navigation.navigate('Followers');
+  }
+  function onPresstoFollowing() {
+    props.navigation.navigate('Following');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.viewBia}>
@@ -43,8 +50,12 @@ export default function ThongtinProfileActivity(props) {
         </View>
         <View style={styles.viewFollwor}>
           <Text style={styles.txtFollows}> 80 Posts</Text>
-          <Text style={styles.txtFollow}>123 Followers</Text>
-          <Text style={styles.txtFollow}> 200 Following</Text>
+          <Text onPress={onPresstoFollower} style={styles.txtFollow}>
+            123 Followers
+          </Text>
+          <Text onPress={onPresstoFollowing} style={styles.txtFollow}>
+            200 Following
+          </Text>
         </View>
         <View style={styles.view} />
         <Text style={styles.textAbout}> About</Text>

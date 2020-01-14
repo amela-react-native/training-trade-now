@@ -8,7 +8,6 @@ import {
   // CheckBox,
   // TextInput,
 } from 'react-native';
-import axios from 'axios';
 import {Buttom} from '../../../components';
 import {CheckBox} from 'react-native-elements';
 import FormTextInput from '../../../components/FormTextInput';

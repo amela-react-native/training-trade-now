@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-
+import IconProvider from '../components/IconProvider';
 // Screen
 import HomeActivity from '../screen/home/HomeActivity';
 import ExChangeActivity from '../screen/change/ExChangeActivity';
@@ -46,6 +46,14 @@ import DetailMessage from '../screen/message/DetailMessage';
 
 // Select SanPham
 import DetailSelectSanPham from '../screen/details/DetailSeclectSanPham';
+
+// Tab
+import TabBarNavigation from './TabBarNavigation';
+import TabBarListFriends from './TabBarListFriends';
+
+// List Friends
+import ListFrirendsActivity from '../screen/listFriends/ListFrirendsActivity';
+
 const BottomNavigation = createStackNavigator(
   {
     default: createBottomTabNavigator({
@@ -66,7 +74,7 @@ const BottomNavigation = createStackNavigator(
         },
       },
       Trade: {
-        screen: ExChangeActivity,
+        screen: TabBarNavigation,
         navigationOptions: {
           tabBarIcon: ({tintColor}) => (
             <Icon name="plus-circle" size={24} color={tintColor} />
@@ -119,8 +127,32 @@ const AppNavigation = createStackNavigator({
 
 export default createAppContainer(
   createStackNavigator({
+    // ListFrirends: {
+    //   screen: ListFrirendsActivity,
+    //   navigationOptions: () => ({
+    //     header: null,
+    //   }),
+    // },
     BottomNavigation: {
       screen: BottomNavigation,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    TabBarListFriends: {
+      screen: TabBarListFriends,
+      navigationOptions: () => ({
+        headerTitle: 'Tiến Long',
+      }),
+    },
+    Notification: {
+      screen: NotificationActivity,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    AddCategory: {
+      screen: AddCategory,
       navigationOptions: () => ({
         header: null,
       }),
@@ -155,12 +187,6 @@ export default createAppContainer(
         header: null,
       }),
     },
-    AddCategory: {
-      screen: AddCategory,
-      navigationOptions: () => ({
-        header: null,
-      }),
-    },
     Category: {
       screen: CategoryActivity,
       navigationOptions: () => ({
@@ -185,12 +211,6 @@ export default createAppContainer(
         header: null,
       }),
     },
-    Notification: {
-      screen: NotificationActivity,
-      navigationOptions: () => ({
-        header: null,
-      }),
-    },
     DetailSwiperImage: {
       screen: DetailSwiperImage,
       navigationOptions: () => ({
@@ -211,3 +231,9 @@ export default createAppContainer(
     },
   }),
 );
+
+const styles = StyleSheet.create({
+  icon: {
+    marginLeft: 20,
+  },
+});

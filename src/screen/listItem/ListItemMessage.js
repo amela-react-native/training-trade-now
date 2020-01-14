@@ -39,7 +39,7 @@ export default function ListItemMessage(props) {
               </View>
               <View style={styles.viewTitle}>
                 <View style={styles.viewTime}>
-                  <Text numberOfLines={5} style={styles.txtUserName}>
+                  <Text numberOfLines={1} style={styles.txtUserName}>
                     {item.author}
                   </Text>
                   <Monent element={Text} fromNow style={styles.txtAddress}>

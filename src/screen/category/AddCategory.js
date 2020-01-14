@@ -8,6 +8,7 @@ import {
   Alert,
   Linking,
   Image,
+  FlatList,
 } from 'react-native';
 import HeaderItem from '../../components/HeaderItem';
 import IconProvider from '../../components/IconProvider';
@@ -20,7 +21,7 @@ const AddCategory = ({image}) => {
   const [news, setNews] = useState('');
   const [description, setDescription] = useState('');
   const [exchange, setExchange] = useState('');
-  const [images, setImage] = useState('');
+  const [images, setImage] = useState([]);
 
   function goBack({props}) {
     props.navigation.navigate('DetailCategory');
@@ -73,7 +74,7 @@ const AddCategory = ({image}) => {
         }).then(imasge => {
           console.log(imasge);
         });
-        setImage({uri: result.path});
+        setImage({uri: result.images});
       }
     } catch (e) {
       console.log(e);
@@ -86,7 +87,13 @@ const AddCategory = ({image}) => {
       setImage({uri: image});
     }
   }, [image]);
-
+  function renderItem({item, index}) {
+    return (
+      <View>
+        <Image source={item.url} style={styles.image} />
+      </View>
+    )
+  }
   return (
     <View style={styles.container}>
       <HeaderItem
@@ -96,60 +103,63 @@ const AddCategory = ({image}) => {
         titleRight={'Đăng'}
         onPressTo={checkValidate}
       />
-      <View style={styles.viewShow}>
-        <View style={styles.viewCamera}>
-          <IconProvider
-            name={'camera-outline'}
-            size={40}
-            color={'white'}
-            style={styles.camera}
-            onPress={onSelectImage}
-          />
+      <View>
+        <View style={styles.viewShow}>
+          <View style={styles.viewCamera}>
+            <IconProvider
+              name={'camera-outline'}
+              size={40}
+              color={'white'}
+              style={styles.camera}
+              onPress={onSelectImage}
+            />
+          </View>
+          <View style={styles.viewScrollview}>
+            <Text>ad</Text>
+            <FlatList data={images} renderItem={renderItem} />
+            <Image style={styles.image} source={{uri: image}} />
+          </View>
         </View>
-        <ScrollView style={styles.viewScrollview}>
-          <Text>ad</Text>
-          <Image style={styles.image} source={images} />
-        </ScrollView>
-      </View>
-      <View style={styles.viewBody}>
-        <TextInputs
-          maxLength={25}
-          placeholder={'Tiêu đề (tối thiểu 5 ký tự)'}
-          value={titles}
-          onChangeText={titles => setTitle(titles)}
-          numberMaxLength={5}
-          numberOfLines={1}
-        />
-        <TextInputs
-          style={styles.input}
-          placeholder="Độ mới (VD: 98%)"
-          maxLength={2}
-          value={news}
-          numberMaxLength={2}
-          keyboardType={'number-pad'}
-          onChangeText={news => setNews(news)}
-        />
-        <TextInputs
-          style={styles.input}
-          placeholder="Nhu cầu muốm đổi:"
-          value={exchange}
-          onChangeText={exchange => setExchange(exchange)}
-          numberMaxLength={20}
-          numberOfLines={1}
-          maxLength={40}
-        />
-        <View style={styles.viewTara}>
+        <View style={styles.viewBody}>
           <TextInputs
-            style={styles.inputTara}
-            placeholder="Hãy nhập chi tiết các thông tin sản phẩm như  nhãn hiệu, màu sắc, kích cỡ ... (Tối thiểu 20 ký tự)"
-            maxLength={200}
-            editable
-            numberOfLines={4}
-            multiline={true}
-            value={description}
-            onChangeText={description => setDescription(description)}
-            numberMaxLength={20}
+            maxLength={25}
+            placeholder={'Tiêu đề (tối thiểu 5 ký tự)'}
+            value={titles}
+            onChangeText={titles => setTitle(titles)}
+            numberMaxLength={5}
+            numberOfLines={1}
           />
+          <TextInputs
+            style={styles.input}
+            placeholder="Độ mới (VD: 98%)"
+            maxLength={2}
+            value={news}
+            numberMaxLength={2}
+            keyboardType={'number-pad'}
+            onChangeText={news => setNews(news)}
+          />
+          <TextInputs
+            style={styles.input}
+            placeholder="Nhu cầu muốm đổi:"
+            value={exchange}
+            onChangeText={exchange => setExchange(exchange)}
+            numberMaxLength={20}
+            numberOfLines={1}
+            maxLength={40}
+          />
+          <View style={styles.viewTara}>
+            <TextInputs
+              style={styles.inputTara}
+              placeholder="Hãy nhập chi tiết các thông tin sản phẩm như  nhãn hiệu, màu sắc, kích cỡ ... (Tối thiểu 20 ký tự)"
+              maxLength={500}
+              editable
+              numberOfLines={4}
+              multiline={true}
+              value={description}
+              onChangeText={description => setDescription(description)}
+              numberMaxLength={20}
+            />
+          </View>
         </View>
       </View>
     </View>
