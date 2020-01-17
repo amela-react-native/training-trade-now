@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-
+import FastImage from 'react-native-fast-image';
 function ListTopTrader(props) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,14 @@ function ListTopTrader(props) {
         renderItem={({item}) => (
           <View style={styles.viewImg}>
             <TouchableOpacity onPress={onPressToProfileUser}>
-              <Image style={styles.img} source={{uri: item.urlToImage}} />
+              <FastImage
+                style={styles.img}
+                source={{
+                  uri: item.urlToImage,
+                  headers: {Authorization: 'someAuthToken'},
+                  priority: FastImage.priority.normal,
+                }}
+              />
             </TouchableOpacity>
           </View>
         )}

@@ -1,12 +1,29 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import HeaderItem from '../../components/HeaderItem';
 import IconProvider from '../../components/IconProvider';
 import GridViewUserOrther from '../listItem/GridViewUserOrther';
 
 function ProfileUserOther(props) {
+  const [follow, setFollow] = useState(true);
+
   function onBackTo() {
     props.navigation.goBack();
+  }
+
+  function updateSearchStatxus() {
+    setFollow({
+      follow: follow,
+    });
+  }
+  function updateTitleStutus() {
+    setFollow(() => {
+      if (follow === true) {
+        setFollow(false);
+      } else {
+        setFollow(true);
+      }
+    });
   }
   return (
     <View style={styles.container}>
@@ -23,8 +40,18 @@ function ProfileUserOther(props) {
           <Text style={styles.txtUsername}>Trần Tiến Long</Text>
           <Text style={styles.txtEmail}>Hà Nội</Text>
           <View style={styles.viewBtn}>
-            <TouchableOpacity style={styles.editProfile}>
-              <Text style={styles.txtEdit}>Follow</Text>
+            <TouchableOpacity
+              style={styles.editProfile}
+              onPress={updateTitleStutus}>
+              {follow ? (
+                <View>
+                  <Text style={{color: '#fefefe', fontSize: 12}}>Follow</Text>
+                </View>
+              ) : (
+                <View>
+                  <Text style={{color: '#36292a', fontSize: 12}}>Unfollow</Text>
+                </View>
+              )}
             </TouchableOpacity>
             <View style={styles.iconSend}>
               <IconProvider name={'send'} size={25} color={'white'} />
@@ -72,6 +99,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: '#665EFF',
     borderColor: '#665EFF',
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   txtEdit: {
     fontSize: 15,

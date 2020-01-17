@@ -16,6 +16,7 @@ function ListSanpham(props) {
   const [loading, setLoading] = useState(false);
   const [likes, setLikes] = useState(0);
   const [value, setValue] = useState(null);
+
   useEffect(() => {
     setLoading(true);
     fetch(
@@ -27,6 +28,7 @@ function ListSanpham(props) {
         setLoading(false);
       });
   }, [articles]);
+
   function increaseValse() {
     console.log(likes);
     if (likes === 0) {
@@ -35,6 +37,7 @@ function ListSanpham(props) {
       setLikes(likes - 1);
     }
   }
+
   return (
     <View style={styles.viewList}>
       <FlatList

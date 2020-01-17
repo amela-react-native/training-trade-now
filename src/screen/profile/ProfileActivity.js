@@ -113,7 +113,7 @@ export default class ProfileActivity extends React.Component {
           backdropPressToClose={false}
           onClosed={() => this.setState({modal: false})}
           onOpened={() => this.setState({modal: true})}>
-          <ThongtinProfile style={styles.swipe} />
+          <ThongtinProfile style={styles.swipe} pr={this.props} />
         </Modal>
       </View>
     );
@@ -199,5 +199,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginHorizontal: 20,
     marginVertical: 20,
-  }
+  },
 });

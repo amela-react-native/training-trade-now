@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 const {width, height} = Dimensions.get('screen');
 export default function GridViewUserOrther(props) {
   const [articles, setArticles] = useState([]);
@@ -38,7 +39,15 @@ export default function GridViewUserOrther(props) {
             //     })
             //   }
             >
-              <Image style={styles.img} source={{uri: item.urlToImage}} />
+              {/* <Image style={styles.img} source={{uri: item.urlToImage}} /> */}
+              <FastImage
+                style={styles.img}
+                source={{
+                  uri: item.urlToImage,
+                  headers: {Authorization: 'someAuthToken'},
+                  priority: FastImage.priority.normal,
+                }}
+              />
             </TouchableOpacity>
           </View>
         )}

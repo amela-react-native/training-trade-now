@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import IconProvider from '../../components/IconProvider';
-
+import FastImage from 'react-native-fast-image';
 function SlideShowADS(props) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);

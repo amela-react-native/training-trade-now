@@ -8,6 +8,7 @@ import {
   Alert,
   Linking,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import HeaderItem from '../../components/HeaderItem';
 import IconProvider from '../../components/IconProvider';
@@ -20,10 +21,10 @@ const AddCategory = ({image}) => {
   const [news, setNews] = useState('');
   const [description, setDescription] = useState('');
   const [exchange, setExchange] = useState('');
-  const [images, setImage] = useState('');
+  const [images, setImages] = useState(null);
 
   function goBack({props}) {
-    props.navigation.navigate('DetailCategory');
+    props.navigation.goBack();
   }
   function checkValidate() {}
 
@@ -34,7 +35,9 @@ const AddCategory = ({image}) => {
         return true;
       }
       if (response === 'denied') {
-        if (Platform.OS === 'ios') showRequestPermission('photo');
+        if (Platform.OS === 'ios') {
+          showRequestPermission('photo');
+        }
         return false;
       }
       return true;
@@ -63,30 +66,59 @@ const AddCategory = ({image}) => {
     try {
       const res = await checkPermissionPhotos();
       if (res) {
-        const result = await ImagePicker.openPicker({
-          width: 300,
-          height: 400,
-          compressImageQuality: 0.7,
-          boderRadius: 50,
-          cropping: true,
+        ImagePicker.openPicker({
           multiple: true,
-        }).then(imasge => {
-          console.log(imasge);
-        });
-        setImage({uri: result.path});
+          waitAnimationEnd: false,
+          includeExif: true,
+          forceJpg: true,
+        })
+          .then(images => {
+            console.log(images);
+            setImages(
+              images.map(i => {
+                console.log('received image', i);
+                return {
+                  uri: i.path,
+                  width: i.width,
+                  height: i.height,
+                  mime: i.mime,
+                  maxLength: 15,
+                };
+              }),
+            );
+          })
+          .catch(e => alert(e));
       }
     } catch (e) {
       console.log(e);
     }
   }
-
-  useEffect(() => {
-    if (image) {
-      console.log('useEffect: ' + image);
-      setImage({uri: image});
+  function renderImage(image) {
+    return (
+      <View style={styles.viewShowImage}>
+        <Image style={styles.image} source={image} />
+        <TouchableOpacity style={styles.viewIconClose}>
+          <IconProvider style={styles.iconClose} name={'close'} size={20} />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+  function renderAsset(image) {
+    if (image.mime && image.mime.toLowerCase().indexOf('video/') !== -1) {
+      console.log('test', image);
+      return this.renderVideo(image);
     }
-  }, [image]);
 
+    return renderImage(image);
+  }
+
+  function getTotal(images) {
+    var total = '';
+    for (var i = 0; i < images.path.length; i++) {
+      total = images.length;
+    }
+    return total;
+  }
   return (
     <View style={styles.container}>
       <HeaderItem
@@ -96,60 +128,66 @@ const AddCategory = ({image}) => {
         titleRight={'Đăng'}
         onPressTo={checkValidate}
       />
-      <View style={styles.viewShow}>
-        <View style={styles.viewCamera}>
-          <IconProvider
-            name={'camera-outline'}
-            size={40}
-            color={'white'}
-            style={styles.camera}
-            onPress={onSelectImage}
-          />
+      <View>
+        <View style={styles.viewShow}>
+          <View style={styles.viewCamera}>
+            <IconProvider
+              name={'camera-outline'}
+              size={40}
+              color={'white'}
+              style={styles.camera}
+              onPress={onSelectImage}
+            />
+            <Text style={styles.txtTotal}>{getTotal}0/15</Text>
+          </View>
+          <View style={styles.viewScrollview}>
+            <ScrollView horizontal={true}>
+              {images
+                ? images.map(i => <View key={i.uri}>{renderAsset(i)}</View>)
+                : null}
+            </ScrollView>
+          </View>
         </View>
-        <ScrollView style={styles.viewScrollview}>
-          <Text>ad</Text>
-          <Image style={styles.image} source={images} />
-        </ScrollView>
-      </View>
-      <View style={styles.viewBody}>
-        <TextInputs
-          maxLength={25}
-          placeholder={'Tiêu đề (tối thiểu 5 ký tự)'}
-          value={titles}
-          onChangeText={titles => setTitle(titles)}
-          numberMaxLength={5}
-          numberOfLines={1}
-        />
-        <TextInputs
-          style={styles.input}
-          placeholder="Độ mới (VD: 98%)"
-          maxLength={2}
-          value={news}
-          numberMaxLength={2}
-          keyboardType={'number-pad'}
-          onChangeText={news => setNews(news)}
-        />
-        <TextInputs
-          style={styles.input}
-          placeholder="Nhu cầu muốm đổi:"
-          value={exchange}
-          onChangeText={exchange => setExchange(exchange)}
-          numberMaxLength={20}
-          numberOfLines={1}
-          maxLength={40}
-        />
-        <View style={styles.viewTara}>
+        <View style={styles.viewBody}>
           <TextInputs
-            style={styles.inputTara}
-            placeholder="Hãy nhập chi tiết các thông tin sản phẩm như  nhãn hiệu, màu sắc, kích cỡ ... (Tối thiểu 20 ký tự)"
-            maxLength={200}
-            editable
-            numberOfLines={4}
-            multiline={true}
-            value={description}
-            onChangeText={description => setDescription(description)}
-            numberMaxLength={20}
+            maxLength={25}
+            placeholder={'Tiêu đề (tối thiểu 5 ký tự)'}
+            value={titles}
+            onChangeText={titles => setTitle(titles)}
+            numberMaxLength={5}
+            numberOfLines={1}
           />
+          <TextInputs
+            style={styles.input}
+            placeholder="Độ mới (VD: 98%)"
+            maxLength={2}
+            value={news}
+            numberMaxLength={2}
+            keyboardType={'number-pad'}
+            onChangeText={news => setNews(news)}
+          />
+          <TextInputs
+            style={styles.input}
+            placeholder="Nhu cầu muốm đổi:"
+            value={exchange}
+            onChangeText={exchange => setExchange(exchange)}
+            numberMaxLength={20}
+            numberOfLines={1}
+            maxLength={40}
+          />
+          <View style={styles.viewTara}>
+            <TextInputs
+              style={styles.inputTara}
+              placeholder="Hãy nhập chi tiết các thông tin sản phẩm như  nhãn hiệu, màu sắc, kích cỡ ... (Tối thiểu 20 ký tự)"
+              maxLength={500}
+              editable
+              numberOfLines={4}
+              multiline={true}
+              value={description}
+              onChangeText={description => setDescription(description)}
+              numberMaxLength={20}
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -163,7 +201,7 @@ const styles = StyleSheet.create({
   viewShow: {
     flexDirection: 'row',
     marginHorizontal: 20,
-    height: 100,
+    height: 120,
     marginTop: 20,
   },
   viewBody: {
@@ -189,13 +227,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
     width: '25%',
     justifyContent: 'center',
-    height: 70,
+    height: 100,
     borderRadius: 10,
+    alignSelf: 'center',
   },
   viewScrollview: {
     width: '65%',
     marginLeft: 20,
     flexDirection: 'row',
+    height: '100%',
   },
   camera: {
     alignSelf: 'center',
@@ -203,6 +243,30 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
+    borderRadius: 10,
+    marginHorizontal: 10,
+    marginTop: 10,
+  },
+  viewIconClose: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    marginHorizontal: 10,
+    marginTop: -110,
+    marginRight: -2,
+  },
+  viewShowImage: {
+    flexDirection: 'column',
+  },
+  iconClose: {
+    backgroundColor: 'gray',
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    padding: 1.5,
+  },
+  txtTotal: {
+    justifyContent: 'center',
+    alignSelf: 'center',
   },
 });
 
