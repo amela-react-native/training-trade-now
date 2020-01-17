@@ -127,18 +127,30 @@ const AppNavigation = createStackNavigator({
 
 export default createAppContainer(
   createStackNavigator({
-    // ListFrirends: {
-    //   screen: ListFrirendsActivity,
-    //   navigationOptions: () => ({
-    //     header: null,
-    //   }),
-    // },
+    AddCategory: {
+      screen: AddCategory,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
     BottomNavigation: {
       screen: BottomNavigation,
       navigationOptions: () => ({
         header: null,
       }),
     },
+    DetailMessage: {
+      screen: DetailMessage,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    // ListFrirends: {
+    //   screen: ListFrirendsActivity,
+    //   navigationOptions: () => ({
+    //     header: null,
+    //   }),
+    // },
     TabBarListFriends: {
       screen: TabBarListFriends,
       navigationOptions: () => ({
@@ -147,12 +159,6 @@ export default createAppContainer(
     },
     Notification: {
       screen: NotificationActivity,
-      navigationOptions: () => ({
-        header: null,
-      }),
-    },
-    AddCategory: {
-      screen: AddCategory,
       navigationOptions: () => ({
         header: null,
       }),
@@ -213,12 +219,6 @@ export default createAppContainer(
     },
     DetailSwiperImage: {
       screen: DetailSwiperImage,
-      navigationOptions: () => ({
-        header: null,
-      }),
-    },
-    DetailMessage: {
-      screen: DetailMessage,
       navigationOptions: () => ({
         header: null,
       }),

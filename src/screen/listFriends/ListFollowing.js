@@ -3,7 +3,7 @@ import {View, StyleSheet, ScrollView, FlatList} from 'react-native';
 import ItemListFriends from '../../components/ItemListFriends';
 import {SearchBar} from 'react-native-elements';
 
-export default function ListFollowing() {
+export default function ListFollowing(props) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {

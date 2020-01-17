@@ -10,6 +10,7 @@ import {
 import IconProvider from '../../components/IconProvider';
 import Monent from 'react-moment';
 import LinearGradient from 'react-native-linear-gradient';
+import FastImage from 'react-native-fast-image';
 function ListItemMyStuff(props) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -37,7 +38,14 @@ function ListItemMyStuff(props) {
         renderItem={({item}) => (
           <View style={styles.container}>
             <View style={styles.viewImg}>
-              <Image style={styles.img} source={{uri: item.urlToImage}} />
+              <FastImage
+                style={styles.img}
+                source={{
+                  uri: item.urlToImage,
+                  headers: {Authorization: 'someAuthToken'},
+                  priority: FastImage.priority.normal,
+                }}
+              />
             </View>
             <View style={styles.viewListText}>
               <Text numberOfLines={1} style={styles.txtTitle}>

@@ -6,10 +6,10 @@ import {Avatar} from 'react-native-elements';
 
 export default function ThongtinProfileActivity(props) {
   function onPresstoFollower() {
-    props.navigation.navigate('Followers');
+    props.pr.navigation.navigate('Followers');
   }
   function onPresstoFollowing() {
-    props.navigation.navigate('Following');
+    props.pr.navigation.navigate('Following');
   }
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-
+import FastImage from 'react-native-fast-image';
 interface Props {
     onPress?(): any,
     onPressTo?(): any,
@@ -13,7 +13,15 @@ export default function ItemListFriends({ onPress, onPressTo, name, avatar, titl
     return (
         <View style={styles.container}>
             <View style={styles.viewImage}>
-                <Image style={styles.avatar} source={{ uri: avatar }} />
+                {/* <Image style={styles.avatar} source={{ uri: avatar }} /> */}
+                <FastImage
+                    style={styles.avatar}
+                    source={{
+                        uri: avatar,
+                        headers: { Authorization: 'someAuthToken' },
+                        priority: FastImage.priority.normal,
+                    }}
+                />
             </View>
             <TouchableOpacity style={styles.viewTxtName} onPress={() => onPress && onPress()}>
                 <Text style={styles.name}>{name}</Text>
